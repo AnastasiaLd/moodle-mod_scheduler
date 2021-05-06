@@ -1,4 +1,18 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Strings for component 'mod_scheduler', language 'en'
@@ -34,6 +48,9 @@ $string['scheduler:viewfullslots'] = 'See slots even if they are fully booked (i
 $string['scheduler:seeotherstudentsbooking'] = 'See other students booked on the slot';
 $string['scheduler:seeotherstudentsresults'] = 'See other slot student\'s results';
 $string['scheduler:seeoverviewoutsideactivity'] = 'Use the overview screen to see slots outside the current scheduler activity.';
+$string['scheduler:editallattended'] = 'Mark students in all appointments as attended / not attended.';
+$string['scheduler:editallgrades'] = 'Edit grades in all appointments.';
+$string['scheduler:editallnotes'] = 'Edit appointment notes in all appointments.';
 
 /* ***** Events ***** */
 $string['event_bookingformviewed'] = 'Scheduler booking form viewed';
@@ -50,6 +67,33 @@ $string['messageprovider:reminder'] = 'Reminder of an upcoming appointment';
 
 /* ***** Search areas ***** */
 $string['search:activity'] = 'Scheduler - activity information';
+
+/* ***** Privacy API strings **** */
+
+$string['privacy:metadata:scheduler_slots'] = 'Represents one slot in a scheduler';
+
+$string['privacy:metadata:scheduler_slots:teacherid'] = 'Teacher associated with the slot';
+$string['privacy:metadata:scheduler_slots:starttime'] = 'Start time of the slot';
+$string['privacy:metadata:scheduler_slots:duration'] = 'Duration of the slot in minutes';
+$string['privacy:metadata:scheduler_slots:appointmentlocation'] = 'Appointment location';
+$string['privacy:metadata:scheduler_slots:notes'] = 'Notes about the slot';
+$string['privacy:metadata:scheduler_slots:notesformat'] = "Format of the notes";
+$string['privacy:metadata:scheduler_slots:exclusivity'] = "Maximum number of students on the slot";
+
+$string['privacy:metadata:scheduler_appointment'] = 'Represents a student appointment in a scheduler';
+
+$string['privacy:metadata:scheduler_appointment:studentid'] = "Student who booked the appointment";
+$string['privacy:metadata:scheduler_appointment:attended'] = "Whether the appointment was attended";
+$string['privacy:metadata:scheduler_appointment:grade'] = "Grade for the appointment";
+$string['privacy:metadata:scheduler_appointment:appointmentnote'] = "Note by teacher (visible to student)";
+$string['privacy:metadata:scheduler_appointment:appointmentnoteformat'] = "Format of teacher note";
+$string['privacy:metadata:scheduler_appointment:teachernote'] = "Note by teacher (private)";
+$string['privacy:metadata:scheduler_appointment:teachernoteformat'] = "Format of private teacher note";
+$string['privacy:metadata:scheduler_appointment:studentnote'] = "Note by student";
+$string['privacy:metadata:scheduler_appointment:studentnoteformat'] = "Format of student note";
+
+$string['privacy:metadata:filepurpose'] = 'File used in notes for the slot or appointment';
+
 
 /* ***** Interface strings ****** */
 
@@ -70,8 +114,6 @@ $string['addstudenttogroup'] = 'Add this student to appointment group';
 $string['allappointments'] = 'All appointments';
 $string['allononepage'] = 'All slots on one page';
 $string['allowgroup'] = 'Exclusive slot - click to change';
-$string['allteachersgrading'] = 'Teachers can grade all appointments';
-$string['allteachersgrading_desc'] = 'When enabled, teachers can grade appointments they are not assigned to.';
 $string['alreadyappointed'] = 'Cannot make the appointment. The slot is already fully booked.';
 $string['appointfor'] = 'Make appointment for';
 $string['appointforgroup'] = 'Make appointments for: {$a}';
@@ -144,6 +186,7 @@ $string['confirmdelete-myunused'] = 'This will delete all your unused slots in t
 $string['confirmdelete-selected'] = 'This will delete the selected slots. Deletion cannot be undone. Continue anyway?';
 $string['confirmdelete-one'] = 'Delete slot?';
 $string['confirmdelete-unused'] = 'This will delete all unused slots in this scheduler. Deletion cannot be undone. Continue anyway?';
+$string['confirmrevoke'] = 'Revoke all appointments in the current slot?';
 $string['conflictingslots'] = 'The slot on {$a} cannot be created due to conflicting slots:';
 $string['copytomyself'] = 'Send a copy to myself';
 $string['course'] = 'Course';
@@ -186,6 +229,10 @@ $string['exclusivityoverload'] = 'The slot has {$a} appointed students, more tha
 $string['explaingeneralconfig'] = 'These options can only be setup at site level and will apply to all schedulers of this Moodle installation.';
 $string['export'] = 'Export';
 $string['exporthdr'] = 'Export slots and appointments';
+$string['exporttimerange'] = 'Time range';
+$string['exporttimerangeall'] = 'Future and past slots';
+$string['exporttimerangefuture'] = 'Only future slots';
+$string['exporttimerangepast'] = 'Only past slots';
 $string['everyone'] = 'Everyone';
 $string['field-date'] = 'Date';
 $string['field-starttime'] = 'Start time';
@@ -205,6 +252,9 @@ $string['field-teachernote'] = 'Confidential note (teacher only)';
 $string['field-studentnote'] = 'Message by student';
 $string['field-filecount'] = 'Number of uploaded files';
 $string['field-grade'] = 'Grade';
+$string['field-groupssingle'] = 'Groups';
+$string['field-groupssingle-label'] = 'Groups (one column)';
+$string['field-groupsmulti'] = 'Groups (several columns)';
 $string['fileformat'] = 'File format';
 $string['fileformat_help'] = 'The following file formats are available:
      <ul>
@@ -338,6 +388,10 @@ $string['reminder'] = 'Reminder';
 $string['requireupload'] = 'File upload required';
 $string['resetslots'] = 'Delete scheduler slots';
 $string['resetappointments'] = 'Delete appointments and grades';
+$string['revealteachernotes'] = 'Reveal teacher notes in privacy exports';
+$string['revealteachernotes_desc'] = 'If this option is selected, then confidential teacher notes (which are normally not visible to students)
+will be revealed to students in data export requests, i.e., via the privay API. You should decide based on individual usage of this field
+whether it needs to be included in data exports for students under the GDPR.';
 $string['return'] = 'Back to course';
 $string['revoke'] = 'Revoke the appointment';
 $string['saturday'] = 'Saturday';
